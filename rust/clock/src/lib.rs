@@ -13,7 +13,7 @@ impl Display for Clock {
 
 impl PartialEq for Clock {
     fn eq(&self, other: &Self) -> bool {
-        self.minutes == other.minutes && self.hours == self.hours
+        self.minutes == other.minutes && self.hours == other.hours
     }
 }
 
@@ -26,15 +26,17 @@ impl Debug for Clock {
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         Clock {
-            hours,
-            minutes,
-        }
+            hours: hours.rem_euclid(24),
+            minutes: 0,
+        }.add_minutes(minutes) // We call add minutes here to update the clock and treat negative minutes
     }
 
     pub fn add_minutes(self, minutes: i32) -> Self {
+        let n_minutes = (self.hours * 60 + self.minutes + minutes).rem_euclid(1440);
+        
         Clock {
-            hours: self.hours + minutes / 60,
-            minutes: self.minutes + minutes % 60
+            hours: n_minutes / 60,
+            minutes: n_minutes.rem_euclid(60),
         }
     }
 }
