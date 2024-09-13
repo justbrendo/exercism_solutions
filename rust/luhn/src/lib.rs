@@ -32,11 +32,7 @@ pub fn is_valid(code: &str) -> bool {
                 })
                 .sum();
 
-            if sum % 10 == 0 {
-                true
-            } else {
-                false
-            }
+            sum % 10 == 0
         }
 
         Err(_) => {
