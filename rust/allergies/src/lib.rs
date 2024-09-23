@@ -5,7 +5,7 @@ pub struct Allergies {
      allergies:Vec<Allergen>
 }
 
-#[derive(Debug, PartialEq, Eq, EnumIter, Clone)]
+#[derive(Debug, PartialEq, Eq, EnumIter, Clone,)]
 pub enum Allergen {
     Eggs,
     Peanuts,
